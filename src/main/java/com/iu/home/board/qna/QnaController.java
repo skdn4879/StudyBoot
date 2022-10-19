@@ -2,9 +2,12 @@ package com.iu.home.board.qna;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +29,9 @@ public class QnaController {
 	
 	@Autowired
 	private QnaService qnaService;
+	
+	@Value("${app.upload.qna}")
+	private String path;
 	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
@@ -63,6 +69,18 @@ public class QnaController {
 		
 		return "redirect:/qna/list";
 		
+	}
+	
+	@GetMapping("detail")
+	public ModelAndView getDetail(QnaVO qnaVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		qnaVO = qnaService.getDetail(qnaVO);
+		
+		mv.addObject("qnaVO", qnaVO);
+		mv.addObject("path", path);
+		mv.setViewName("board/detail");
+		
+		return mv;
 	}
 	
 }

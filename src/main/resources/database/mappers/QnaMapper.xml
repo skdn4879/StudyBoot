@@ -9,11 +9,43 @@
 		SELECT * FROM QNA ORDER BY num DESC LIMIT #{startRow}, #{perPage}
 	</select>
 	
-	<insert id="setAdd" parameterType="QnaVO">
+	<!-- useGeneratedKeys = Auto Increment된 값을 keyProperty로 사용하겠다. keyProperty에 지정된 멤버 변수에 담겠다. -->
+	<insert id="setAdd" parameterType="QnaVO" useGeneratedKeys="true" keyProperty="num">
 		INSERT INTO QNA VALUES(null, #{writer}, #{title}, #{contents}, #{hit}, now(), #{ref}, #{step}, #{depth})
 	</insert>
 	
 	<select id="getTotalCount" resultType="Long">
 		SELECT COUNT(num) FROM QNA
 	</select>
+	
+	<insert id="setAddFile" parameterType="QnaFileVO">
+		INSERT INTO QNAFILES VALUES(null, #{num}, #{fileName}, #{oriName})
+	</insert>
+	
+	<select id="getDetail" parameterType="QnaVO" resultMap="getDetailResult">
+		SELECT Q.*, QF.filenum, QF.fileName, QF.oriName
+		FROM QNA Q
+		LEFT JOIN QNAFILES QF
+		ON (Q.num = QF.num)
+		WHERE Q.num = #{num}
+	</select>
+	
+	<resultMap type="QnaVO" id="getDetailResult">
+		<id column="num" property="num"/>
+		<result column="title" property="title"/>
+		<result column="writer" property="writer"/>
+		<result column="contents" property="contents"/>
+		<result column="hit" property="hit"/>
+		<result column="regDate" property="regDate"/>
+		<result column="ref" property="ref"/>
+		<result column="step" property="step"/>
+		<result column="depth" property="depth"/>
+		
+		<collection property="qnaFiles" javaType="List" ofType="QnaFileVO">
+			<id column="filenum" property="fileNum"/>
+			<result column="fileName" property="fileName"/>
+			<result column="oriName" property="oriName"/>
+		</collection>
+		
+	</resultMap>
 </mapper>

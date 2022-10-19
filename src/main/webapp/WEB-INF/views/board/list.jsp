@@ -29,7 +29,7 @@
 				<tr>
 					<td>${qnaVO.num }</td>
 					<td>${qnaVO.writer }</td>
-					<td>${qnaVO.title }</td>
+					<td><a href="./detail?num=${qnaVO.num }">${qnaVO.title }</a></td>
 					<td>${qnaVO.contents }</td>
 					<td>${qnaVO.hit }</td>
 					<td>${qnaVO.regDate }</td>
