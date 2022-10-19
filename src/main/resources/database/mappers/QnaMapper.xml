@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		    
+<mapper namespace="com.iu.home.board.qna.QnaMapper"> <!-- 해당 풀패키지에 해당하는 클래스와 매핑된다. -->
+	<!-- id를 메소드명과 동일하게 하면 자동으로 매핑된다. -->
+	<select id="getList" parameterType="Pager" resultType="QnaVO">
+		SELECT * FROM QNA ORDER BY num DESC LIMIT #{startRow}, #{perPage}
+	</select>
+	
+	<insert id="setAdd" parameterType="QnaVO">
+		INSERT INTO QNA VALUES(null, #{writer}, #{title}, #{contents}, #{hit}, now(), #{ref}, #{step}, #{depth})
+	</insert>
+	
+	<select id="getTotalCount" resultType="Long">
+		SELECT COUNT(num) FROM QNA
+	</select>
+</mapper>
