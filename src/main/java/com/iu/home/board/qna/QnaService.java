@@ -43,10 +43,10 @@ public class QnaService {
 		//String fileName = fileManager.saveFile(qnaVO.getFiles()[1], path);
 		
 		for(MultipartFile f : qnaVO.getFiles()) {
-			if(f.isEmpty()) {
+			/*if(f.isEmpty()) {
 				log.info("Exception 발생");
 				throw new Exception();
-			}
+			}*/
 			
 			if(!f.isEmpty()) {
 				String fileName = fileManager.saveFile(f, path);
