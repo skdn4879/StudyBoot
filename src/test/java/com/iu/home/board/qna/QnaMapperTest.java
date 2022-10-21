@@ -12,10 +12,21 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class QnaMapperTest {
+	
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	
+	@Value("${my.default}")
+	private String app;
+	
+	@Test
+	void test3() throws Exception {
+		log.info("Default : {}", app);
+	}
 	
 	/*@Autowired
 	private QnaMapper qnaMapper;

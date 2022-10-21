@@ -19,11 +19,22 @@ public class HomeController {
 	//private final Logger log = LoggerFactory.getLogger(HomeController.class);
 	private final Logger log = LoggerFactory.getLogger(this.getClass()); //자기 자신의 클래스
 	
+	//@Value("${my.message.hi}")
+	private String message;
+	
+	@Value("${my.default}")
+	private String app;
+	
 	@Autowired
 	private QnaMapper qnaMapper;
 	
 	@GetMapping("/")
 	public String home() throws Exception {
+		
+		log.info("----------------------------------------------");
+		log.info("Message : {}", message);
+		log.info("Default : {}", app);
+		log.info("----------------------------------------------");
 		
 		return "index";
 	}
