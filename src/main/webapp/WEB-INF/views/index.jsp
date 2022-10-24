@@ -7,11 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- <link href="/css/index.css" rel="stylesheet"> -->
-<c:import url="./temp/boot.jsp"></c:import>
+<%-- <c:import url="./temp/boot.jsp"></c:import> --%>
 </head>
 <body>
 	<h1>Index Page</h1>
-	<img src="/images/title3.jpg">
-	<a href="./qna/list">QNA</a>
+	<!-- <img src="/images/title3.jpg"> -->
+	<!-- <a href="./qna/list">QNA</a> -->
 </body>
 </html>
