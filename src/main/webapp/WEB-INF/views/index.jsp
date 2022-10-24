@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/css/index.css" rel="stylesheet">
+<!-- <link href="/css/index.css" rel="stylesheet"> -->
 <c:import url="./temp/boot.jsp"></c:import>
 </head>
 <body>
