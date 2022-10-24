@@ -24,7 +24,7 @@
 	<c:forEach items="${qnaVO.qnaFiles }" var="file">
 		<h3>${file.fileName }</h3>
 		<h3>${path }${file.fileName}</h3>
-		<img alt="" src="/file/${file.fileName }">
+		<img alt="" src="/file/qna/${file.fileName }">
 		<a href="/fileDown/qna?fileNum=${file.fileNum }">사진 다운로드</a>
 		<img alt="" src="/file/notice/testImage.jpg">
 		<a href="/fileDown/notice?fileNum=${file.fileNum }">노티스 사진 다운로드</a>
