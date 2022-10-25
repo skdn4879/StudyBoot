@@ -32,10 +32,11 @@ public class FileManageController {
 		
 		// DB에서 정보 조회
 		if(path.equals("qna")) {
-			
+			qnaFileVO = qnaService.getFileDetail(qnaFileVO);
+		} else {
+			qnaFileVO.setFileName("fd5f315b-5427-434e-b70e-ec9543835ecf_.jpg");
+			qnaFileVO.setOriName("title3.jpg");
 		}
-		qnaFileVO.setFileName("fd5f315b-5427-434e-b70e-ec9543835ecf_.jpg");
-		qnaFileVO.setOriName("title3.jpg");
 		
 		mv.addObject("fileVO", qnaFileVO);
 		mv.addObject("path", path);
@@ -44,6 +45,10 @@ public class FileManageController {
 		//Component에 별도의 이름을 지정하지 않으면 맨 앞글자를 소문자로 바꾼 것이 default
 		// Bean 이름을 지정하면 View를 찾는 것이 아닌 해당 Bean을 실행
 		// view의 이름과 일치하는 bean의 이름이있으먼 해당 객체 실행
+		// 원래대로라면 WEB-INF/views/fileManager.jsp 이렇게 찾아가야 하지만
+		// BeanNameResolver라는게 내장되어 있어서 이게 먼저 동작
+		// view의 이름과 일치하는 bean의 이름이 있으면 해당 Bean 실행
+		// 위에 Resolver가 없으면 InternalResourceViewResolver가 작동해서 jsp로 이동
 		
 		return mv;
 		

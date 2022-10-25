@@ -48,4 +48,9 @@
 		</collection>
 		
 	</resultMap>
+	
+	<select id="getFileDetail" parameterType="QnaFileVO" resultType="QnaFileVO">
+		SELECT fileNum, fileName, oriName FROM QNAFILES WHERE fileNum = #{fileNum}
+	</select>
+	
 </mapper>
