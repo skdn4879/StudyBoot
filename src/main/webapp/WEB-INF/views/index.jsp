@@ -13,5 +13,12 @@
 	<h1>Index Page</h1>
 	<img src="/images/title3.jpg">
 	<a href="./qna/list">QNA</a>
+	<a href="./member/join">회원가입</a>
+	<c:if test="${sessionScope.member == null }">
+		<a href="./member/login">로그인</a>
+	</c:if>
+	<c:if test="${sessionScope.member != null }">
+		<a href="./member/logout">로그아웃</a>
+	</c:if>
 </body>
 </html>
