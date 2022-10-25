@@ -1,5 +1,6 @@
 package com.iu.home.file;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.home.board.qna.QnaFileVO;
+import com.iu.home.board.qna.QnaService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,6 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/fileDown/*")
 @Slf4j
 public class FileManageController {
+	
+	@Autowired
+	private QnaService qnaService;
 
 	@GetMapping("{path}")	// Restful, RestAPI와 관련있음, url 주소의 일부분을 데이터로 활용할 수 있음
 	public ModelAndView fileDown(@PathVariable String path, QnaFileVO qnaFileVO) throws Exception {
@@ -26,6 +31,9 @@ public class FileManageController {
 		ModelAndView mv = new ModelAndView();
 		
 		// DB에서 정보 조회
+		if(path.equals("qna")) {
+			
+		}
 		qnaFileVO.setFileName("fd5f315b-5427-434e-b70e-ec9543835ecf_.jpg");
 		qnaFileVO.setOriName("title3.jpg");
 		
@@ -35,6 +43,7 @@ public class FileManageController {
 		mv.setViewName("fileManager"); //파일 다운로드를 다루는 Bean의 이름
 		//Component에 별도의 이름을 지정하지 않으면 맨 앞글자를 소문자로 바꾼 것이 default
 		// Bean 이름을 지정하면 View를 찾는 것이 아닌 해당 Bean을 실행
+		// view의 이름과 일치하는 bean의 이름이있으먼 해당 객체 실행
 		
 		return mv;
 		

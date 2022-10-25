@@ -25,7 +25,7 @@
 		<h3>${file.fileName }</h3>
 		<h3>${path }${file.fileName}</h3>
 		<img alt="" src="/file/qna/${file.fileName }">
-		<a href="/fileDown/qna?fileNum=${file.fileNum }">사진 다운로드</a>
+		<a href="/fileDown/qna?fileNum=${file.fileNum }">${file.oriName } 사진 다운로드</a>
 		<img alt="" src="/file/notice/testImage.jpg">
 		<a href="/fileDown/notice?fileNum=${file.fileNum }">노티스 사진 다운로드</a>
 		<!-- file로 시작하지 않으니 WebConfig의 regisry가 가로채지 않음 -->
