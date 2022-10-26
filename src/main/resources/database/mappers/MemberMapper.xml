@@ -4,6 +4,10 @@
 		    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 		    
 <mapper namespace="com.iu.home.member.MemberMapper">
+
+	<select id="getIdCheck" parameterType="MemberVO" resultType="Integer">
+		SELECT COUNT(ID) FROM MEMBER WHERE ID = #{id}
+	</select>
 	
 	<insert id="setJoin" parameterType="MemberVO">
 		INSERT INTO MEMBER(ID, PW, NAME, EMAIL, ENABLED) VALUES(#{id}, #{pw}, #{name}, #{email}, 1)

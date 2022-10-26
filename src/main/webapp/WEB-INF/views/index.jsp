@@ -20,5 +20,16 @@
 	<c:if test="${sessionScope.member != null }">
 		<a href="./member/logout">로그아웃</a>
 	</c:if>
+	
+	<button id="btn">CLICK</button>
+	
+	<button class="buttons">buttons</button>
+	<button class="buttons">buttons</button>
+	<button class="buttons">buttons</button>
+	
+	<div id="test"></div>
+	
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	<script type="text/javascript" src="/js/test.js"></script>
 </body>
 </html>

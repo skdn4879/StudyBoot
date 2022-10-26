@@ -1,5 +1,8 @@
 package com.iu.home.member;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -15,6 +19,16 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@GetMapping("idCheck")
+	@ResponseBody
+	public Map<String, Integer> getIdCheck(MemberVO memberVO) throws Exception {
+		int result = memberService.getIdCheck(memberVO);
+		Map<String, Integer> map = new HashMap<>();
+		map.put("result", result);
+		
+		return map;
+	}
 	
 	@GetMapping("logout")
 	public String getLogout(HttpSession session) throws Exception {

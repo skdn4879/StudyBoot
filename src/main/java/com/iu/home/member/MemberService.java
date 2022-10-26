@@ -11,6 +11,10 @@ public class MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
 	
+	public int getIdCheck(MemberVO memberVO) throws Exception {
+		return memberMapper.getIdCheck(memberVO);
+	}
+	
 	public int setJoin(MemberVO memberVO) throws Exception {
 		boolean memberResult = memberMapper.setJoin(memberVO) == 1 ? true : false;
 		boolean roleResult = memberMapper.setRoleJoin(memberVO) == 1 ? true : false;

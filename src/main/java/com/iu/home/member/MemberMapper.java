@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface MemberMapper {
 
+	public int getIdCheck(MemberVO memberVO) throws Exception;
+	
 	public int setJoin(MemberVO memberVO) throws Exception;
 	
 	public int setRoleJoin(MemberVO memberVO) throws Exception;
