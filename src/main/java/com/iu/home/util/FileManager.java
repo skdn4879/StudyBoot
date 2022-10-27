@@ -102,4 +102,10 @@ public class FileManager extends AbstractView {
 		
 	}
 	
+	public boolean deleteFile(String fileName, String path) throws Exception {
+		File file = new File(path, fileName);
+		
+		return file.delete();
+	}
+	
 }

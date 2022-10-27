@@ -57,6 +57,7 @@
 	</div>
 	
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript" src="/js/memberAdd.js"></script>
 	<script type="text/javascript" src="/js/util.js"></script>
 </body>

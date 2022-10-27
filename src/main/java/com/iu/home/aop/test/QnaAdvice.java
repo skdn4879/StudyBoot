@@ -31,7 +31,7 @@ public class QnaAdvice {
 		log.info("Kind : {}", joinPoint.getKind());
 	}
 	
-	@Around("execution(* com.iu.home.board.qna.QnaService.set*(..))")
+	//@Around("execution(* com.iu.home.board.qna.QnaService.set*(..))")
 	public Object aroundTest(ProceedingJoinPoint joinPoint) throws Throwable {
 		// ProceedingJoinPoint는 Around 만 가능
 		// joinPoint는 point-cut으로 지정된 핵심 로직을 객체화시킨 것

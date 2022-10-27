@@ -10,6 +10,7 @@
 </head>
 <body>
 	<h1>Detail Page</h1>
+	<a class="btn btn-outline-info" role="button" href="./update?num=${qnaVO.num }">수정</a>
 	
 	<h3>${qnaVO.num }</h3>
 	<h3>${qnaVO.writer }</h3>

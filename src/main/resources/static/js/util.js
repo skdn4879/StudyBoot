@@ -24,14 +24,18 @@ $("#idCheckBtn").click(function(){
         return;
     }
 
-    /*$.ajax({
-        url : "/member/idCheck?id=" + $("#id").val(),
+    $.ajax({
+        type : "POST",
+        url : "/member/idCheck",
+        data : {
+            id : $("#id").val()
+        },
         success : function(result){
             console.log(result);
         }
-    });*/
+    });
 
-    const xhttp = new XMLHttpRequest();
+    /*const xhttp = new XMLHttpRequest();
 
     xhttp.open("GET", "/member/idCheck?id=" + $("#id").val());
 
@@ -43,6 +47,6 @@ $("#idCheckBtn").click(function(){
             result = JSON.parse(result);
             console.log(result);
         }
-    }
+    }*/
 
 });

@@ -53,4 +53,8 @@
 		SELECT fileNum, fileName, oriName FROM QNAFILES WHERE fileNum = #{fileNum}
 	</select>
 	
+	<delete id="setFileDelete" parameterType="QnaFileVO">
+		DELETE FROM QNAFILES WHERE fileNum = #{fileNum}
+	</delete>
+	
 </mapper>

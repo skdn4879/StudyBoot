@@ -5,22 +5,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Update</title>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <c:import url="../temp/boot.jsp"></c:import>
 </head>
 <body>
-	<h1>Board Write Page</h1>
+	<h1>Update Page</h1>
 	
 	<div>
-		<form action="./write" method="post" enctype="multipart/form-data">
+		<form action="./update" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="num" id="num" value="${qnaVO.num }">
 			<div class="mb-3">
 			  <label for="writer" class="form-label">Writer</label>
-			  <input type="text" class="form-control" id="writer" placeholder="writer" name="writer">
+			  <input type="text" class="form-control" id="writer" placeholder="writer" name="writer" value="${qnaVO.writer }" readonly="readonly">
 			</div>
 			<div class="mb-3">
 			  <label for="title" class="form-label">Title</label>
-			  <input type="text" class="form-control" id="title" placeholder="title" name="title">
+			  <input type="text" class="form-control" id="title" placeholder="title" name="title" value="${qnaVO.title }">
 			</div>
 			<div class="mb-3">
 			  <label for="contents" class="form-label">Contents</label>
@@ -28,8 +29,12 @@
 			</div>
 			
 			<div class="mb-3" id="fileList">
-			  <!-- <label for="files" class="form-label">File</label>
-			  <input type="file" class="form-control" id="files" name="files"> -->
+			  <c:forEach items="${qnaVO.qnaFiles }" var="fileVO">
+			  	<p>
+			  		${fileVO.oriName }
+			  		<button class="btn btn-danger deleteFile" type="button" data-num="${fileVO.fileNum }">삭제</button>
+			  	</p>
+			  </c:forEach>
 			</div>
 			<div class="mb-3">
 			  <button type="button" class="btn btn-info" id="fileAddBtn">FileAdd</button>
@@ -43,7 +48,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 	<script type="text/javascript">
 		$("#contents").summernote();
+		$("#contents").summernote('code', '${qnaVO.contents }');
 	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript" src="/js/qnaWrite.js"></script>
 	<script type="text/template" id="fileInputTemp">
 		<div class="container input-group mb-3">
