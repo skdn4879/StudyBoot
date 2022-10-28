@@ -31,7 +31,11 @@ $("#idCheckBtn").click(function(){
             id : $("#id").val()
         },
         success : function(result){
-            console.log(result);
+            if(result.result == 1){
+                $("#inputIdResult").html("중복된 ID");
+            } else {
+                $("#inputIdResult").html("사용가능한 ID");
+            }
         }
     });
 

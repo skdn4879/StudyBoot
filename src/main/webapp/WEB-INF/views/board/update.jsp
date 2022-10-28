@@ -28,7 +28,7 @@
 			  <textarea class="form-control" id="contents" rows="3" name="contents"></textarea>
 			</div>
 			
-			<div class="mb-3" id="fileList">
+			<div class="mb-3" id="fileList" data-file-size="${qnaVO.qnaFiles.size() }">
 			  <c:forEach items="${qnaVO.qnaFiles }" var="fileVO">
 			  	<p>
 			  		${fileVO.oriName }

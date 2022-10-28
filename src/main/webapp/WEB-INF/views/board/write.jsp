@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,18 +14,25 @@
 	<h1>Board Write Page</h1>
 	
 	<div>
-		<form action="./write" method="post" enctype="multipart/form-data">
+		<!-- <form action="./write" method="post" enctype="multipart/form-data"> -->
+		<form:form modelAttribute="qnaVO" method="post" enctype="multipart/form-data">
 			<div class="mb-3">
 			  <label for="writer" class="form-label">Writer</label>
-			  <input type="text" class="form-control" id="writer" placeholder="writer" name="writer">
+			  <form:input path="writer" cssClass="form-control" id="writer"/>
+			  <form:errors path="writer"></form:errors>
+			  <!-- <input type="text" class="form-control" id="writer" placeholder="writer" name="writer"> -->
 			</div>
 			<div class="mb-3">
 			  <label for="title" class="form-label">Title</label>
-			  <input type="text" class="form-control" id="title" placeholder="title" name="title">
+			  <form:input path="title" cssClass="form-control" id="title"/>
+			  <form:errors path="title"></form:errors>
+			  <!-- <input type="text" class="form-control" id="title" placeholder="title" name="title"> -->
 			</div>
 			<div class="mb-3">
 			  <label for="contents" class="form-label">Contents</label>
-			  <textarea class="form-control" id="contents" rows="3" name="contents"></textarea>
+			  <form:textarea path="contents" cssClass="form-control" id="contents"/>
+			  <form:errors path="contents"></form:errors>
+			  <!-- <textarea class="form-control" id="contents" rows="3" name="contents"></textarea> -->
 			</div>
 			
 			<div class="mb-3" id="fileList">
@@ -36,7 +44,8 @@
 			</div>
 			
 			<button class="btn btn-outline-primary" type="submit">Write</button>
-		</form>
+		</form:form>
+		<%-- </form> --%>
 	</div>
 	
 	<script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>

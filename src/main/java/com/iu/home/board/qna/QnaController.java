@@ -5,13 +5,16 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -76,22 +79,30 @@ public class QnaController {
 	}
 	
 	@GetMapping("write")
-	public String getWrite() throws Exception{
+	public String getWrite(@ModelAttribute QnaVO qnaVO) throws Exception{
 		return "board/write";
 	}
 	
 	@PostMapping("write")
-	public String setWrite(QnaVO qnaVO, RedirectAttributes redirectAttributes) throws Exception {
+	public ModelAndView setWrite(@Valid QnaVO qnaVO, BindingResult bindingResult, RedirectAttributes redirectAttributes, ModelAndView mv) throws Exception {
 		qnaVO.setHit(0L);
 		qnaVO.setRef(0L);
 		qnaVO.setStep(0L);
 		qnaVO.setDepth(0L);
 		
-		int result = qnaService.setAdd(qnaVO);
-		log.info("Result {}", result); //로그 기록 남기기(나중에 sql log 설정시 없애도 무방)
-		redirectAttributes.addAttribute("result", result);
+		if(bindingResult.hasErrors()) {
+			log.info("------------ Qna 검증 오류 -----------");
+			mv.setViewName("board/write");
+			return mv;
+		}
 		
-		return "redirect:/qna/list";
+		/*int result = qnaService.setAdd(qnaVO);
+		log.info("Result {}", result); //로그 기록 남기기(나중에 sql log 설정시 없애도 무방)
+		redirectAttributes.addAttribute("result", result);*/
+		
+		mv.setViewName("redirect:/qna/list");
+		
+		return mv;
 		
 	}
 	

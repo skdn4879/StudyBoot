@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,16 @@
 </head>
 <body>
 	<h1>Index Page</h1>
+	
+	<h1> <spring:message code="hi"></spring:message> </h1>
+	<!-- code에 해당하는 키와 text 속성 둘다 없으면 code안에 텍스트 출력 -->
+	<h1> <spring:message code="test" text="키가 없으면 출력되는 메시지"></spring:message> </h1>
+	
+	<c:if test="${not empty sessionScope.member }">
+		<spring:message code="welcome" arguments="${sessionScope.member.id }"></spring:message>
+		<spring:message code="welcome2" arguments="${sessionScope.member.id }, ${sessionScope.member.name }" argumentSeparator=","></spring:message>
+	</c:if>
+	
 	<img src="/images/title3.jpg">
 	<a href="./qna/list">QNA</a>
 	<a href="./member/join">회원가입</a>

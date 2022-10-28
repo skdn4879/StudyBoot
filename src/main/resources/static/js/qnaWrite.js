@@ -1,7 +1,18 @@
 let fileCount = 0;
 let fileLimit = 5;
+let flag = true;
 
 $("#fileAddBtn").click(function(){
+
+    if(flag){
+        let size = $("#fileList").attr("data-file-size");
+
+        if(size == undefined){
+            size = 0;
+        }
+        fileCount = size;
+        flag = false;
+    }
 
     if(fileCount >= fileLimit){
         return;
