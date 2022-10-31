@@ -16,8 +16,10 @@
 		<div class="input-group mb-3">
 		  <span class="input-group-text" id="idText">ID</span>
 		  <form:input path="id" cssClass="form-control" id="id"/>
-		  <form:errors path="id"></form:errors>
-		  <div id="inputIdResult"></div>
+		  <div id="inputIdResult">
+		  	<form:errors path="id"></form:errors>
+		  	<!-- JS와 검증 메시지가 겹칠 경우 inputIdResult.html을 사용하여 둘 중 하나만 출력하게 할 수 있다. -->
+		  </div>
 		  <!-- <input type="text" class="form-control" placeholder="ID" aria-label="id" aria-describedby="id" name="id" id="id"> -->
 		  <button type="button" class="btn btn-info" id="idCheckBtn">중복확인</button>
 		</div>
@@ -37,6 +39,9 @@
 		  <span class="input-group-text" id="nameText">Name</span>
 		  <form:input path="name" cssClass="form-control" id="name"/>
 		  <form:errors path="name"></form:errors>
+		  <div id="inputNameResult">
+		  	${name }
+		  </div>
 		 <!-- <input type="text" class="form-control" placeholder="Name" aria-label="name" aria-describedby="name" name="name" id="name"> -->
 		</div>
 		<div class="input-group mb-3">
@@ -73,7 +78,7 @@
 	
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<!-- <script type="text/javascript" src="/js/memberAdd.js"></script> -->
+	<script type="text/javascript" src="/js/memberAdd.js"></script>
 	<script type="text/javascript" src="/js/util.js"></script>
 </body>
 </html>
