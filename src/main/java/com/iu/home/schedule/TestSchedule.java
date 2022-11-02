@@ -18,7 +18,7 @@ public class TestSchedule {
 	@Autowired
 	private MemberService memberService;
 	
-	@Scheduled(cron = "30 * * * * *")
+	//@Scheduled(cron = "30 * * * * *")
 	public void cron() throws Exception {
 		log.info("30초 실행");
 		log.info(Calendar.getInstance().getTime().toString());
