@@ -28,6 +28,11 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	@GetMapping
+	public String getMyPage() throws Exception {
+		return "member/mypage";
+	}
+	
 	@PostMapping("idCheck")
 	@ResponseBody
 	public Map<String, Integer> getIdCheck(MemberVO memberVO) throws Exception {
@@ -38,27 +43,27 @@ public class MemberController {
 		return map;
 	}
 	
-	@GetMapping("logout")
+	/*@GetMapping("logout")
 	public String getLogout(HttpSession session) throws Exception {
 		//session.removeAttribute("member");
 		session.invalidate();
 		
 		return "redirect:/";
-	}
+	}*/
 	
 	@GetMapping("login")
 	public String getLogin() throws Exception {
 		return "member/login";
 	}
 	
-	@PostMapping("login")
+	/*@PostMapping("login")
 	public String login(MemberVO memberVO, HttpSession session) throws Exception {
 		memberVO = memberService.getLogin(memberVO);
 		
 		session.setAttribute("member", memberVO);
 		
 		return "redirect:/";
-	}
+	}*/
 
 	@GetMapping("join")
 	public String getJoin(@ModelAttribute MemberVO memberVO) throws Exception{

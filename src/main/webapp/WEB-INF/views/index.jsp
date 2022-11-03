@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,20 +18,32 @@
 	<!-- code에 해당하는 키와 text 속성 둘다 없으면 code안에 텍스트 출력 -->
 	<h1> <spring:message code="test" text="키가 없으면 출력되는 메시지"></spring:message> </h1>
 	
-	<c:if test="${not empty sessionScope.member }">
-		<spring:message code="welcome" arguments="${sessionScope.member.id }"></spring:message>
-		<spring:message code="welcome2" arguments="${sessionScope.member.id }, ${sessionScope.member.name }" argumentSeparator=","></spring:message>
-	</c:if>
+	<sec:authorize access="isAuthenticated()">
+		<sec:authentication property="Principal" var="member"/>
+		<spring:message code="welcome" arguments="${member.id }"></spring:message>
+		<spring:message code="welcome2" arguments="${member.id }, ${member.name }" argumentSeparator=","></spring:message>
+	</sec:authorize>
 	
 	<img src="/images/title3.jpg">
 	<a href="./qna/list">QNA</a>
-	<a href="./member/join">회원가입</a>
-	<c:if test="${sessionScope.member == null }">
+	
+	<sec:authorize access="!isAuthenticated()">
+		<a href="./member/join">회원가입</a>
 		<a href="./member/login">로그인</a>
-	</c:if>
-	<c:if test="${sessionScope.member != null }">
+	</sec:authorize>
+	<sec:authorize access="isAuthenticated()">
+		<a href="./member/mypage">마이페이지</a>
 		<a href="./member/logout">로그아웃</a>
-	</c:if>
+		
+		<sec:authorize url="/admin">
+			<a href="/admin">A</a>
+		</sec:authorize>
+		
+		<sec:authorize access="hasAnyRole('ADMIN', 'MANAGER')">
+			<a href="/manager">M</a>
+		</sec:authorize>
+		
+	</sec:authorize>
 	
 	<button id="btn">CLICK</button>
 	

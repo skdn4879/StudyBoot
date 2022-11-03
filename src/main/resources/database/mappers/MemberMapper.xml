@@ -17,18 +17,19 @@
 		INSERT INTO MEMBER_ROLE VALUES(#{id}, (SELECT NUM FROM ROLE WHERE ROLENAME = 'ROLE_MEMBER'))
 	</insert>
 	
-	<select id="getLogin" parameterType="MemberVO" resultMap="getLoginResult">
+	<select id="getLogin" parameterType="String" resultMap="getLoginResult">
 		SELECT M.*, R.*
 		FROM MEMBER M
 		INNER JOIN MEMBER_ROLE MR
 		ON (M.ID = MR.ID)
 		INNER JOIN ROLE R
 		ON (MR.NUM = R.NUM)
-		WHERE M.ID = #{id} AND M.PW = #{pw}
+		WHERE M.ID = #{username}
 	</select>
 	
 	<resultMap type="MemberVO" id="getLoginResult">
 		<id column="ID" property="id"/>
+		<result column="PW" property="pw"/>
 		<result column="NAME" property="name"/>
 		<result column="EMAIL" property="email"/>
 		<result column="ENABLED" property="enabled"/>

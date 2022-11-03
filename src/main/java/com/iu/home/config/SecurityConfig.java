@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -53,10 +55,20 @@ public class SecurityConfig {
 				.permitAll() 					// 로그인 페이지는 모두 허용
 				.and()
 			.logout()		//로그아웃 페이지도 모두 허용
+				.logoutUrl("/member/logout")
+				.logoutSuccessUrl("/")
+				.invalidateHttpSession(true)
+				.deleteCookies("JSESSIONID")
 				.permitAll();
 		// 보통 막을 거를 위에서 다 막고 나머지를 허용하는 방식으로 사용 (막을거 위, 안막을거 아래)
 		
 		return httpSecurity.build();
+	}
+	
+	// 평문(Clear Text)을 암호화 시켜주는 객체 생성
+	@Bean
+	public PasswordEncoder getEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 	
 }
