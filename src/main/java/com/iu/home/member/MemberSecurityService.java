@@ -22,6 +22,9 @@ public class MemberSecurityService implements UserDetailsService {
 		memberVO.setId(username);*/
 		log.info("--------------- 로그인 시도 ----------------");
 		MemberVO memberVO = memberMapper.getLogin(username);
+		// ID, PW 둘 다 맞으면 UserDetails 가 정상 반환
+		// ID 만 맞으면 BadCredentialsException 발생
+		// 둘 다 틀리면 null이 리턴되므로 역시 Exception 발생
 		log.info("MemberVO => {}", memberVO);
 		return memberVO;
 	}

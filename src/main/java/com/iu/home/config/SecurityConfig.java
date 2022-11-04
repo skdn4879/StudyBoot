@@ -1,5 +1,6 @@
 package com.iu.home.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,9 +10,26 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.iu.home.member.security.LoginFail;
+import com.iu.home.member.security.LoginSuccess;
+import com.iu.home.member.security.LogoutCustom;
+import com.iu.home.member.security.LogoutSuccessCustom;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+	
+	@Autowired
+	private LoginSuccess loginSuccess;
+	
+	@Autowired
+	private LoginFail loginFail;
+	
+	@Autowired
+	private LogoutCustom logoutCustom;
+	
+	@Autowired
+	private LogoutSuccessCustom logoutSuccessCustom;
 
 	@Bean
 	//public 선언 시 default로 바꾸라는 메시지 출력
@@ -50,13 +68,17 @@ public class SecurityConfig {
 				//.loginProcessingUrl("login") 	// 로그인을 진행 요청할 form 태그의 action의 주소 지정
 				.passwordParameter("pw")		// 기본 파라미터인 password가 아닌 pw를 사용
 				.usernameParameter("id")		// 기본 파라미터인 username 대신 id를 사용
-				.defaultSuccessUrl("/") 		// 인증 성공할 경우 요청할 URL
-				.failureUrl("/member/login")	// 인증 실패했을 경우 요청할 URL
+				//.defaultSuccessUrl("/") 		// 인증 성공할 경우 요청할 URL
+				.successHandler(loginSuccess)
+				//.failureUrl("/member/login?error=true&message=LoginFail")	// 인증 실패했을 경우 요청할 URL
+				.failureHandler(loginFail)
 				.permitAll() 					// 로그인 페이지는 모두 허용
 				.and()
 			.logout()		//로그아웃 페이지도 모두 허용
 				.logoutUrl("/member/logout")
 				.logoutSuccessUrl("/")
+				.logoutSuccessHandler(logoutSuccessCustom)
+				.addLogoutHandler(logoutCustom)
 				.invalidateHttpSession(true)
 				.deleteCookies("JSESSIONID")
 				.permitAll();

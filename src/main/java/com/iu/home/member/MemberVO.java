@@ -62,28 +62,28 @@ public class MemberVO implements UserDetails{
 	public boolean isAccountNonExpired() {
 		// 계정의 만료 여부
 		// true : 만료 안됨
-		// false : 만료 됨, 로그인 불가
+		// false : 만료 됨, 로그인 불가, AccountExpiredException
 		return true;
 	}
 	@Override
 	public boolean isAccountNonLocked() {
 		// 계정의 잠김 여부
 		// true : 계정이 잠기지 않음
-		// false : 계정이 잠김, 로그인 불가
+		// false : 계정이 잠김, 로그인 불가, LockedException
 		return true;
 	}
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// 패스워드 만료 여부
 		// true : 만료 안됨
-		// false : 만료 됨, 로그인 불가
+		// false : 만료 됨, 로그인 불가, CredentialsExpiredException
 		return true;
 	}
 	@Override
 	public boolean isEnabled() {
 		// 계정 사용 여부
 		// true : 계정 활성화(계정 사용 가능)
-		// false : 계정 비활성화(계정 사용 불가)
+		// false : 계정 비활성화(계정 사용 불가), DisabledException
 		return true;
 	}
 	
